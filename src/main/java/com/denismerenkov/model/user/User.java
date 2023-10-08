@@ -1,5 +1,6 @@
 package com.denismerenkov.model.user;
 
+import com.denismerenkov.model.Order;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
@@ -31,4 +32,7 @@ public class User extends BaseEntity {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private List<Role> roles;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Order> orders;
 }
