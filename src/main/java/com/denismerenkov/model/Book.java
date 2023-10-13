@@ -2,10 +2,7 @@ package com.denismerenkov.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.aspectj.weaver.ast.Or;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -13,6 +10,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
+@RequiredArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "books", uniqueConstraints =
@@ -22,14 +20,20 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @NonNull
     private String title;
+    @NonNull
     private String author;
+    @NonNull
     private String genre;
+    @NonNull
     private double price;
-    private int quantityInStock = 0;
+    @NonNull
+    private int quantityInStock;
 
-    @ManyToMany(mappedBy = "books")
+    @ManyToMany(mappedBy = "books", fetch = FetchType.EAGER)
     @JsonIgnore
+    @ToString.Exclude
     private List<Order> orders = new ArrayList<>();
 
     public void incrementQuantity() {
@@ -37,6 +41,9 @@ public class Book {
     }
 
     public void decrementQuantity() {
+        if(this.quantityInStock < 1){
+            throw new IndexOutOfBoundsException("Quantity in stock equals 0");
+        }
         this.quantityInStock -= 1;
     }
 }

@@ -1,10 +1,13 @@
 package com.denismerenkov.controller;
 
 import com.denismerenkov.dto.ResponseResult;
+import com.denismerenkov.model.rest.AuthResponse;
 import com.denismerenkov.model.user.User;
 import com.denismerenkov.security.jwt.JwtTokenProvider;
 import com.denismerenkov.service.UserService;
 import com.denismerenkov.util.StringUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +16,6 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 
 @RestController
@@ -37,7 +37,7 @@ public class AuthenticationController {
     }
 
     @PostMapping
-    public ResponseEntity<ResponseResult<Map<String, String>>> login(@RequestParam String userName, @RequestParam String password) {
+    public ResponseEntity<ResponseResult<AuthResponse>> login(@RequestParam String userName, @RequestParam String password) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, password));
             User user = userService.findByUsername(userName);
@@ -49,10 +49,7 @@ public class AuthenticationController {
             this.userService.update(user);
 
 
-            Map<String, String> response = new HashMap<>();
-            response.put("username", userName);
-            response.put("token", token);
-            response.put("hash", hash);
+            AuthResponse response = new AuthResponse(hash, userName, token);
 
             return new ResponseEntity<>(new ResponseResult<>(null, response), HttpStatus.OK);
         } catch (AuthenticationException e) {
@@ -60,22 +57,19 @@ public class AuthenticationController {
         }
     }
 
+
     @GetMapping
-    public ResponseEntity<ResponseResult<Map<String, String>>> refresh(@RequestParam String hash){
+    public ResponseEntity<ResponseResult<AuthResponse>> refresh(@RequestParam String hash){
         try {
             User user = this.userService.findByHash(hash);
 
             String token = jwtTokenProvider.createToken(user.getUserName(), user.getRoles());
 
-            Map<String, String> response = new HashMap<>();
-            response.put("username", user.getUserName());
-            response.put("token", token);
+            AuthResponse response = new AuthResponse(null, user.getUserName(), token);
 
             return new ResponseEntity<>(new ResponseResult<>(null, response), HttpStatus.OK);
         } catch (Exception e) {
             throw new BadCredentialsException("Invalid username or password");
         }
     }
-
-
 }

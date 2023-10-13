@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: db
+    environment:
+         POSTGRES_USER: postgres
+         POSTGRES_PASSWORD: postgres
+         POSTGRES_DB: online_bookstore
+    ports:
+      - "5432:5432"
+
+
+  app:
+    image: springboot-postgresql
+    build: ./
+    container_name: springboot-postgresql
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+

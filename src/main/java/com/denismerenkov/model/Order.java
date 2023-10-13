@@ -32,8 +32,8 @@ public class Order {
 
     @ManyToMany
     @JoinTable(
-            name = "books",
-            joinColumns = @JoinColumn(name = "user_id"),
+            name = "order_books",
+            joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id"))
     List<Book> books = new ArrayList<>();
 

@@ -15,13 +15,12 @@ import java.util.List;
 @RestController
 @RequestMapping("/book")
 public class BookController {
-
     private BookService bookService;
-
     @Autowired
     public void setBookService(BookService bookService) {
         this.bookService = bookService;
     }
+
 
     @PostMapping("/admin")
     public ResponseEntity<ResponseResult<Book>> addBook(@RequestBody Book book) {
@@ -92,7 +91,8 @@ public class BookController {
             return new ResponseEntity<>(new ResponseResult<>(e.getMessage(), null), HttpStatus.BAD_REQUEST);
         }
     }
-    @GetMapping
+
+    @GetMapping("/sort")
     public ResponseEntity<ResponseResult<List<Book>>> getSorted(@RequestParam SortType sortType) {
         try {
             List<Book> books = this.bookService.sort(sortType);

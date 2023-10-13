@@ -1,7 +1,8 @@
-package com.denismerenkov.service;
+package com.denismerenkov.service.impl;
 
 import com.denismerenkov.model.Book;
 import com.denismerenkov.repository.BookRepository;
+import com.denismerenkov.service.BookService;
 import com.denismerenkov.util.SortType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BookServiceImpl implements BookService{
+public class BookServiceImpl implements BookService {
 
     private BookRepository bookRepository;
 
@@ -21,9 +22,10 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public void add(Book book) {
+    public boolean add(Book book) {
         try {
             this.bookRepository.save(book);
+            return true;
         } catch (Exception e) {
             throw new IllegalArgumentException("Book has already added!");
         }

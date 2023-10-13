@@ -1,10 +1,11 @@
-package com.denismerenkov.service;
+package com.denismerenkov.service.impl;
 
 
 import com.denismerenkov.model.user.Role;
 import com.denismerenkov.model.user.User;
 import com.denismerenkov.repository.RoleRepository;
 import com.denismerenkov.repository.UserRepository;
+import com.denismerenkov.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

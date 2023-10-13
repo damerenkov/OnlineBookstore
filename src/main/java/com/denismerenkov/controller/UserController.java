@@ -8,12 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
     private final UserService userService;
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -30,7 +28,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ResponseResult<User>> getUserById(@PathVariable(name = "id") Long id){
+    public ResponseEntity<ResponseResult<User>> getUserById(@PathVariable long id){
         try {
             User user = userService.findById(id);
             return new ResponseEntity<>(

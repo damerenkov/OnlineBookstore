@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookService {
 
-    void add(Book book);
+    boolean add(Book book);
     List<Book> get();
     List<Book> getByTitle(String title);
     List<Book> getByAuthor(String author);

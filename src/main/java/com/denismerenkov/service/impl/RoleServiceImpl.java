@@ -1,12 +1,13 @@
-package com.denismerenkov.service;
+package com.denismerenkov.service.impl;
 
 import com.denismerenkov.model.user.Role;
 import com.denismerenkov.repository.RoleRepository;
+import com.denismerenkov.service.RoleService;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
     private RoleRepository roleRepository;
 
     public RoleServiceImpl(RoleRepository roleRepository) {

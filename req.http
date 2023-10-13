@@ -1,0 +1,196 @@
+### add admin role
+POST localhost:8075/role/admin
+
+### add new admin
+POST localhost:8075/user
+content-type: application/json
+
+{
+  "userName" : "denis",
+  "firstName" : "denis",
+  "lastName" : "merenkov",
+  "email" : "denismerenkov713@gmail.com",
+  "password" : "123test",
+  "roles" : [
+    {
+      "name" : "ROLE_ADMIN"
+    }
+  ]
+}
+
+### authentification
+POST localhost:8075/auth?userName=petr&password=125test
+
+### not working
+GET localhost:8075/user/1
+
+###
+GET localhost:8075/user/1
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzE4MDY2MiwiZXhwIjoxNjk3MTg0MjYyfQ.Zp3HX8vrCnSDTNFrURbdE2xfgto1msOCSP3mUQH7biM
+
+### add role not working
+POST localhost:8075/role
+content-type: application/json
+
+{
+  "name" : "ROLE_USER"
+}
+
+### add role
+POST localhost:8075/role
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5pcyIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjk3MTIyNTU3LCJleHAiOjE2OTcxMjYxNTd9.GHR0u2wOqygs97JVoNNkY_iFc0mS53GhIAtYrpoGm38
+content-type: application/json
+
+{
+  "name" : "ROLE_USER"
+}
+
+### add new user
+POST localhost:8075/user
+content-type: application/json
+
+{
+  "userName" : "petr",
+  "firstName" : "petr",
+  "lastName" : "demidov",
+  "email" : "petr@mail.ru",
+  "password" : "124test",
+  "roles" : [
+    {
+      "name" : "ROLE_USER"
+    }
+  ]
+}
+
+### Book
+### Not working add
+POST localhost:8075/book/admin
+Content-Type: application/json
+
+{
+  "title": "title",
+  "author": "author",
+  "genre": "genre",
+  "price": 100,
+  "quantityInStock": 10
+}
+### Working add 1
+POST localhost:8075/book/admin
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5pcyIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjk3MTIyNTU3LCJleHAiOjE2OTcxMjYxNTd9.GHR0u2wOqygs97JVoNNkY_iFc0mS53GhIAtYrpoGm38
+Content-Type: application/json
+
+{
+  "title": "title",
+  "author": "author",
+  "genre": "genre",
+  "price": 100,
+  "quantityInStock": 10
+}
+
+### Working add 2
+POST localhost:8075/book/admin
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5pcyIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjk3MTIyNTU3LCJleHAiOjE2OTcxMjYxNTd9.GHR0u2wOqygs97JVoNNkY_iFc0mS53GhIAtYrpoGm38
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "author": "author2",
+  "genre": "genre2",
+  "price": 150,
+  "quantityInStock": 1
+}
+
+### Working add 3
+POST localhost:8075/book/admin
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5pcyIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjk3MTIyNTU3LCJleHAiOjE2OTcxMjYxNTd9.GHR0u2wOqygs97JVoNNkY_iFc0mS53GhIAtYrpoGm38
+Content-Type: application/json
+
+{
+  "title": "title2",
+  "author": "author2",
+  "genre": "genre",
+  "price": 250,
+  "quantityInStock": 5
+}
+
+### Not working update
+PUT localhost:8075/book/admin
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "title",
+  "author": "author2",
+  "genre": "genre2",
+  "price": 250,
+  "quantityInStock": 5
+}
+
+### Working update
+PUT localhost:8075/book/admin
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5pcyIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjk3MTIyNTU3LCJleHAiOjE2OTcxMjYxNTd9.GHR0u2wOqygs97JVoNNkY_iFc0mS53GhIAtYrpoGm38
+Content-Type: application/json
+
+{
+  "id": 2,
+  "title": "title",
+  "author": "author2",
+  "genre": "genre2",
+  "price": 250,
+  "quantityInStock": 5
+}
+
+### Not working delete
+DELETE localhost:8075/book/admin/3
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW5pcyIsInJvbGVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNjk3MTIyNTU3LCJleHAiOjE2OTcxMjYxNTd9.GHR0u2wOqygs97JVoNNkY_iFc0mS53GhIAtYrpoGm38
+
+### Get all books
+GET localhost:8075/book
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyMzAzNSwiZXhwIjoxNjk3MTI2NjM1fQ.arsPyGg0EIM8AqFGcKwX_uxxtQLXeqsSURw8Bw34ByI
+
+### Get books by title
+GET localhost:8075/book/title?title=title
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyMzAzNSwiZXhwIjoxNjk3MTI2NjM1fQ.arsPyGg0EIM8AqFGcKwX_uxxtQLXeqsSURw8Bw34ByI
+
+### Get books by author
+GET localhost:8075/book/author?author=author2
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyMzAzNSwiZXhwIjoxNjk3MTI2NjM1fQ.arsPyGg0EIM8AqFGcKwX_uxxtQLXeqsSURw8Bw34ByI
+
+### Get books by genre
+GET localhost:8075/book/genre?genre=genre
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyMzAzNSwiZXhwIjoxNjk3MTI2NjM1fQ.arsPyGg0EIM8AqFGcKwX_uxxtQLXeqsSURw8Bw34ByI
+
+### GET list of books sorted by type
+GET localhost:8075/book/sort?sortType=PRICE
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyMzAzNSwiZXhwIjoxNjk3MTI2NjM1fQ.arsPyGg0EIM8AqFGcKwX_uxxtQLXeqsSURw8Bw34ByI
+
+### Order
+
+### Create order(Shopping bag) //Exception User does not exists
+POST localhost:8075/order/create/4
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyMzk2NiwiZXhwIjoxNjk3MTI3NTY2fQ.ALH9TQ5IZq7byWrftvBCVNLHagQy5J_-tb4do1EapQ4
+
+### Create order(Shopping bag)
+POST localhost:8075/order/create/2
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyNDkzMywiZXhwIjoxNjk3MTI4NTMzfQ.5DEq05aHObQm8uNBLi6dy7djYd9VND9yIpoqEbpUxIU
+
+### Add Book to shopping bag
+PUT localhost:8075/order/addItem/1?bookId=1
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyNTAyNSwiZXhwIjoxNjk3MTI4NjI1fQ.1aRn1aG1MzWbcrYKHuyKOzkB0cNv3JqCWtvxxzMsTZg
+
+### Delete Book from shopping bag
+PUT localhost:8075/order/deleteItem/1?bookId=2
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyNTAyNSwiZXhwIjoxNjk3MTI4NjI1fQ.1aRn1aG1MzWbcrYKHuyKOzkB0cNv3JqCWtvxxzMsTZg
+
+### Get user shopping bag
+GET localhost:8075/order/2
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyNTkxMiwiZXhwIjoxNjk3MTI5NTEyfQ.fiNuVKyPQARv8zPEvdwHwOhazckMUVyxd6uad4cJPOM
+
+### Accept Shopping bag and chande status to ORDER
+POST localhost:8075/order/accept/1
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyNTkxMiwiZXhwIjoxNjk3MTI5NTEyfQ.fiNuVKyPQARv8zPEvdwHwOhazckMUVyxd6uad4cJPOM
+
+### GET list of user orders
+GET localhost:8075/order/list/2
+Authorization: Bearer_eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwZXRyIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY5NzEyNTkxMiwiZXhwIjoxNjk3MTI5NTEyfQ.fiNuVKyPQARv8zPEvdwHwOhazckMUVyxd6uad4cJPOM
+
